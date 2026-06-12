@@ -1,250 +1,189 @@
-/* Configurações Gerais e Reset */
+:root {
+    --primary: #2e7d32;
+    --primary-light: #4caf50;
+    --dark: #1b5e20;
+    --text: #2c3e50;
+    --bg: #f4f7f6;
+    --card-bg: #ffffff;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    scroll-behavior: smooth;
-}
-
-:root {
-    --primary-color: #2e7d32; /* Verde Escuro / Sustentável */
-    --secondary-color: #81c784; /* Verde Claro */
-    --dark-color: #1b5e20;
-    --light-bg: #f4f9f4;
-    --text-color: #333;
 }
 
 body {
-    color: var(--text-color);
+    background-color: var(--bg);
+    color: var(--text);
     line-height: 1.6;
 }
 
-/* Cabeçalho e Menu */
 header {
-    background-color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 10%;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-}
-
-nav ul li {
-    margin-left: 20px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 600;
-    transition: color 0.3s;
-}
-
-nav ul li a:hover {
-    color: var(--primary-color);
-}
-
-/* Seção Hero (Banner Principal) */
-.hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    background-color: var(--dark);
     color: white;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 4px solid var(--primary-light);
+}
+
+header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+header p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.container {
+    max-width: 700px;
+    margin: 30px auto;
     padding: 0 20px;
 }
 
-.hero-content h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
+.card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-.hero-content p {
-    font-size: 20px;
-    margin-bottom: 30px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+.form-group {
+    margin-bottom: 25px;
 }
 
-/* Botões */
-.btn {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: white;
-    padding: 12px 30px;
-    text-decoration: none;
-    border-radius: 5px;
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--dark);
+}
+
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-light);
+}
+
+.radio-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.radio-option {
+    flex: 1;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.radio-option input {
+    display: none;
+}
+
+.radio-option:hover {
+    border-color: var(--primary-light);
+}
+
+.radio-option.selected {
+    background-color: #e8f5e9;
+    border-color: var(--primary);
+    color: var(--dark);
     font-weight: bold;
+}
+
+button {
+    width: 100%;
+    background-color: var(--primary);
+    color: white;
     border: none;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 6px;
     cursor: pointer;
     transition: background 0.3s;
 }
 
-.btn:hover {
-    background-color: var(--dark-color);
+button:hover {
+    background-color: var(--dark);
 }
 
-/* Seções Gerais */
-.section-padding {
-    padding: 80px 10%;
+#result-section {
+    display: none;
+    margin-top: 25px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.score-box {
     text-align: center;
-}
-
-.bg-light {
-    background-color: var(--light-bg);
-}
-
-h2 {
-    font-size: 36px;
-    color: var(--dark-color);
-    margin-bottom: 10px;
-}
-
-.section-subtitle {
-    font-size: 18px;
-    color: #666;
-    margin-bottom: 40px;
-}
-
-/* Layout em Grid (Cards) */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 20px;
-}
-
-.card {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    transition: transform 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card-icon {
-    font-size: 40px;
-    color: var(--primary-color);
-    margin-bottom: 15px;
-}
-
-.card h3 {
-    margin-bottom: 10px;
-    color: #333;
-}
-
-/* Estilo Projetos */
-.project-card {
-    background: var(--primary-color);
-    color: white;
-    padding: 40px;
-    border-radius: 8px;
-    text-align: left;
-}
-
-.project-card h3 {
-    margin-bottom: 15px;
-    font-size: 22px;
-}
-
-/* Redução de Impactos */
-.impactos-container {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: left;
-}
-
-.impacto-item {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 25px;
-    background: var(--light-bg);
     padding: 20px;
+    background: #e8f5e9;
     border-radius: 8px;
-}
-
-.impacto-item i {
-    font-size: 24px;
-    color: var(--primary-color);
-    margin-right: 20px;
-    margin-top: 3px;
-}
-
-/* Formulário de Contato */
-.contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.form-group {
     margin-bottom: 20px;
+    border: 1px solid var(--primary-light);
 }
 
-.form-group input, .form-group textarea {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    font-size: 16px;
-}
-
-.form-group input:focus, .form-group textarea:focus {
-    border-color: var(--primary-color);
-}
-
-.form-response {
-    margin-top: 20px;
+.score-value {
+    font-size: 3rem;
     font-weight: bold;
+    color: var(--dark);
 }
 
-/* Rodapé */
-footer {
-    background-color: var(--dark-color);
-    color: white;
-    text-align: center;
-    padding: 20px;
-    font-size: 14px;
+.status-badge {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
-/* Responsividade Básica */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        padding: 15px;
-    }
-    nav ul {
-        margin-top: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    nav ul li {
-        margin: 5px 10px;
-    }
-    .hero-content h1 {
-        font-size: 32px;
-    }
+.status-aprovado { background: #c8e6c9; color: #256029; }
+.status-analise { background: #ffe0b2; color: #c62828; }
+
+.partner-banks {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.bank-list {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+.btn-print {
+    background-color: #34495e;
+    margin-top: 15px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Oculta o formulário na hora de gerar o PDF */
+@media print {
+    body { background: white; }
+    .card { box-shadow: none; padding: 0; }
+    button, .radio-group, input, select { display: none; }
+    #result-section { display: block !important; }
 }

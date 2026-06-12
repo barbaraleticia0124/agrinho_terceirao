@@ -3,131 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Futuro Verde do Campo - Agronegócio Sustentável</title>
+    <title>AgroCrédito Verde | Simulador de Financiamento Sustentável</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <header>
-        <div class="logo">
-            <i class="fas fa-leaf"></i> Futuro Verde
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#home">O Futuro do Agro</a></li>
-                <li><a href="#energias">Energias Renováveis</a></li>
-                <li><a href="#precisao">Agricultura de Precisão</a></li>
-                <li><a href="#impactos">Redução de Impactos</a></li>
-                <li><a href="#projetos">Projetos</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
+        <h1>AgroCrédito Verde</h1>
+        <p>Transformando práticas sustentáveis em taxas de juros reduzidas</p>
     </header>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>O Futuro do Agro é Sustentável</h1>
-            <p>Inovação, tecnologia e respeito ao meio ambiente caminhando juntos para alimentar o mundo de forma consciente.</p>
-            <a href="#energias" class="btn">Conheça as Soluções</a>
-        </div>
-    </section>
-
-    <section id="energias" class="section-padding">
-        <h2>Energias Renováveis no Campo</h2>
-        <p class="section-subtitle">Transformando recursos naturais em potência produtiva limpa.</p>
-        <div class="grid-container">
-            <div class="card">
-                <i class="fas fa-solar-panel card-icon"></i>
-                <h3>Energia Solar</h3>
-                <p>Uso de painéis fotovoltaicos para alimentar sistemas de irrigação e estruturas da fazenda, reduzindo custos e emissões.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-wind card-icon"></i>
-                <h3>Energia Eólica</h3>
-                <p>Aproveitamento das correntes de vento em áreas abertas para a geração de eletricidade descentralizada.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-biohazard card-icon"></i> <h3>Biomassa e Biogás</h3>
-                <p>Conversão de resíduos orgânicos e dejetos animais em combustível e energia térmica, promovendo a economia circular.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="precisao" class="section-padding bg-light">
-        <h2>Agricultura de Precisão</h2>
-        <p class="section-subtitle">Tecnologia de ponta para otimizar o uso de recursos e aumentar a produtividade.</p>
-        <div class="grid-container">
-            <div class="card">
-                <i class="fas fa-satellite card-icon"></i>
-                <h3>Monitoramento por Satélite</h3>
-                <p>Análise em tempo real das condições das lavouras, identificando pragas ou estresse hídrico precocemente.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-tint card-icon"></i>
-                <h3>Irrigação Inteligente</h3>
-                <p>Sistemas automatizados que aplicam a quantidade exata de água baseada na umidade real do solo.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="impactos" class="section-padding">
-        <h2>Redução de Impactos Ambientais</h2>
-        <p class="section-subtitle">Práticas essenciais para proteger a biodiversidade e conservar o solo.</p>
-        <div class="impactos-container">
-            <div class="impacto-item">
-                <i class="fas fa-check-circle"></i>
-                <div>
-                    <h3>Rotação de Culturas</h3>
-                    <p>Preserva os nutrientes do solo e quebra o ciclo de pragas sem o uso excessivo de químicos.</p>
+    <div class="container">
+        <div class="card">
+            <form id="simulador-form" onsubmit="calcularCredito(event)">
+                
+                <div class="form-group">
+                    <label for="nome">Nome do Produtor / Propriedade</label>
+                    <input type="text" id="nome" required placeholder="Ex: Fazenda Santa Maria">
                 </div>
-            </div>
-            <div class="impacto-item">
-                <i class="fas fa-check-circle"></i>
-                <div>
-                    <h3>Defensivos Biológicos</h3>
-                    <p>Substituição progressiva de agroquímicos por soluções biológicas que não agridem os polinizadores.</p>
+
+                <div class="form-group">
+                    <label for="valor">Valor do Crédito Solicitado (R$)</label>
+                    <input type="number" id="valor" required placeholder="Ex: 500000" min="10000">
                 </div>
+
+                <div class="form-group">
+                    <label>Possui área de preservação (APP/Reserva Legal) regularizada?</label>
+                    <div class="radio-group">
+                        <div class="radio-option" onclick="selectRadio(this, 'app', 30)">
+                            <input type="radio" name="app" value="sim" required> Sim, 100% em conformidade
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this, 'app', 0)">
+                            <input type="radio" name="app" value="nao"> Em processo / Não
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Qual sistema de cultivo principal utilizado?</label>
+                    <select id="cultivo" required onchange="atualizarScore()">
+                        <option value="">Selecione uma opção</option>
+                        <option value="40">Integração Lavoura-Pecuária-Floresta (ILPF) (+40 Pts)</option>
+                        <option value="30">Plantio Direto na Palha (+30 Pts)</option>
+                        <option value="15">Cultivo Convencional com rotação de culturas (+15 Pts)</option>
+                        <option value="0">Cultivo Convencional Padrão (0 Pts)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Utiliza Bioinsumos ou Defensivos Biológicos?</label>
+                    <div class="radio-group">
+                        <div class="radio-option" onclick="selectRadio(this, 'bio', 30)">
+                            <input type="radio" name="bio" value="sim" required> Sim, em mais de 50% da área
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this, 'bio', 0)">
+                            <input type="radio" name="bio" value="nao"> Uso mínimo ou Não utiliza
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit">Simular Taxas e Crédito</button>
+            </form>
+
+            <div id="result-section">
+                <div class="score-box">
+                    <h3>Seu Score Agro Ambiental</h3>
+                    <div class="score-value" id="score-display">0</div>
+                    <div id="status-badge" class="status-badge">Analisando...</div>
+                </div>
+
+                <div class="form-group">
+                    <p><strong>Resultado da Análise:</strong></p>
+                    <p id="analise-texto"></p>
+                </div>
+
+                <div class="partner-banks" id="banks-section">
+                    <p><strong>Fundos Verdes e Bancos Parceiros Recomendados:</strong></p>
+                    <div class="bank-list" id="bank-list">
+                        </div>
+                </div>
+
+                <button class="btn-print" onclick="window.print()">Imprimir Relatório Oficial (PDF)</button>
             </div>
         </div>
-    </section>
-
-    <section id="projetos" class="section-padding bg-light">
-        <h2>Projetos Sustentáveis</h2>
-        <p class="section-subtitle">Casos reais de sucesso que inspiram o novo agronegócio.</p>
-        <div class="grid-container">
-            <div class="project-card">
-                <h3>Fazenda Carbono Zero</h3>
-                <p>Iniciativa focada no plantio integrado (Lavoura-Pecuária-Floresta) que neutraliza as emissões de gases estufa.</p>
-            </div>
-            <div class="project-card">
-                <h3>Guardiões das Águas</h3>
-                <p>Projeto de reflorestamento de matas ciliares para a proteção de nascentes dentro de propriedades rurais.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="contato" class="section-padding">
-        <h2>Contato</h2>
-        <p class="section-subtitle">Quer transformar a sua produção? Fale com nossos especialistas.</p>
-        <form id="contactForm" class="contact-form">
-            <div class="form-group">
-                <input type="text" id="name" placeholder="Seu Nome" required>
-            </div>
-            <div class="form-group">
-                <input type="email" id="email" placeholder="Seu E-mail" required>
-            </div>
-            <div class="form-group">
-                <textarea id="message" rows="5" placeholder="Sua Mensagem ou Dúvida" required></textarea>
-            </div>
-            <button type="submit" class="btn">Enviar Mensagem</button>
-        </form>
-        <div id="formResponse" class="form-response"></div>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 Futuro Verde do Campo. Todos os direitos reservados.</p>
-    </footer>
+    </div>
 
     <script src="script.js"></script>
 </body>
